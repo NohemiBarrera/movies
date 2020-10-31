@@ -1,32 +1,39 @@
 import React, {Component} from 'react';
 import FacebookLoginBtn from 'react-facebook-login';
+import { Redirect } from "react-router";
+import {login} from "../../actions/auth";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-export default class LoginFacebook extends Component {
+class LoginFacebook extends Component {
     state = {
         auth: false,
         name: '',
         picture: ''
-    }
+    };
+    static propTypes = {
+        isAuthenticated: PropTypes.bool
+      };
+
     componentClicked = () => {
-        console.log('Facebook btn click')
+        console.log('Facebook btn click');
     }
 
     responseFacebook = (res) => {
-        console.log(res);
-        this.setState({
-            auth: true,
-            name: res.name,
-            picture: res.picture.data.url
-        })
+        this.props.onLogin(res)
     }
 
-    render(){
+    render(location){
         let facebookData;
-        this.state.auth ?  
-            facebookData = (<div>
-                {`hola ${this.state.name}`}
-                <img src={this.state.picture} alt="Meme"/>
-            </div>) : facebookData = (
+        this.props.isAuthenticated ?  
+            facebookData = (
+                <Redirect
+                    to={{
+                        pathname: "/",
+                        state: { from: location }
+                    }}
+                />
+            ) : facebookData = (
                 <FacebookLoginBtn
                     appId="412227666450687"
                     autoLoad={true}
@@ -42,3 +49,19 @@ export default class LoginFacebook extends Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return{
+        onLogin: (res) => {
+            dispatch(login(res));
+        }
+    }
+}
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(LoginFacebook);
