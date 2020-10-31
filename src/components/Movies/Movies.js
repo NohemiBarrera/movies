@@ -1,10 +1,12 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Movies (){
-    console.log(localStorage.getItem("token"));
+    const name = useSelector(state => state.auth.name)
+    console.log(name);
     return(
         <div>
-            <p>Holi hehehehe</p>
+            <p>Holi {name}</p>
         </div>
     )
 };

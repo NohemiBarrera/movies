@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar(props) {
   const classes = useStyles();
+  console.log(props.isAuthenticated);
 
   return (
     props.isAuthenticated && (

@@ -1,20 +1,33 @@
 import {
     LOGIN_SUCCESS,
-    LOGIN_FAIL,
     LOGOUT_SUCCESS
 } from "./types";
 
 //const origin = window.location.origin;
 
 export const login = (res) => {
-    console.log(res.accessToken)
     return {
         type: LOGIN_SUCCESS,
         payload: {
             auth: true,
             name: res.name,
             picture: res.picture.data.url,
-            token: res.accessToken
+            token: res.accessToken,
+            isAuthenticated: true,
         }
     }
-}
+};
+
+export const logout = () => {
+    console.log("aió")
+    return {
+        type: LOGOUT_SUCCESS,
+        payload: {
+            auth: false,
+            token: null,
+            isAuthenticated: false,
+            name: null,
+            picture: null
+        }
+    }
+};

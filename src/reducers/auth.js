@@ -4,11 +4,12 @@ import {
     LOGOUT_SUCCESS
 } from "../actions/types";
 
-import login from "../actions/auth";
-
 const initialState = {
     token: localStorage.getItem("token"),
-    isAuthenticated: false
+    isAuthenticated: false,
+    auth: false,
+    name: "",
+    picture: ""
 }
 
 export default function(state = initialState, action){
@@ -18,7 +19,7 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 ...action.payload,
-                isAuthenticated: true,
+                isAuthenticated: action.payload.isAuthenticated,
                 auth: action.payload.auth,
                 name: action.payload.name,
                 picture: action.payload.picture
@@ -28,8 +29,10 @@ export default function(state = initialState, action){
             localStorage.removeItem("token");
             return {
                 ...state,
-                token: null,
                 isAuthenticated: false,
+                auth: false,
+                name: null,
+                picture: null
             }
         default:
             return state;
