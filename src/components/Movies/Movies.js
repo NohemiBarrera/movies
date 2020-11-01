@@ -1,5 +1,5 @@
 import React from "react";
-//import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import { useEffect } from "react";
 //import { getNowPlayingMovies } from "../../actions/movies";
 import NowPlaying from "./NowPlaying";
@@ -12,13 +12,14 @@ const Movies = () => {
   const popular = <Popular/>;
   const top_rated = <TopRated/>;
   const upcoming = <Upcoming/>;
+  
+  const auth = useSelector(state => state.auth.name)
+
+  console.log(auth);
 
   return (
     <div>
-      {now_playing}
-      {popular}
-      {top_rated}
-      {upcoming}
+      Miau  
     </div>
   );
 }
