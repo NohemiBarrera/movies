@@ -1,12 +1,17 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
+//import { useEffect } from "react";
+//import { getNowPlayingMovies } from "../../actions/movies";
+import NowPlaying from "./NowPlaying";
 
-export default function Movies (){
-    const name = useSelector(state => state.auth.name)
-    console.log(name);
-    return(
-        <div>
-            <p>Holi {name}</p>
-        </div>
-    )
-};
+const Movies = () => {
+  const now_playing = <NowPlaying />;
+
+  return (
+    <div>
+      {now_playing}
+    </div>
+  );
+}
+
+export default Movies;

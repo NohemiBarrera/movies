@@ -19,7 +19,7 @@ export const login = (res) => {
 };
 
 export const logout = () => {
-    console.log("aió")
+    window.FB.logout();
     return {
         type: LOGOUT_SUCCESS,
         payload: {

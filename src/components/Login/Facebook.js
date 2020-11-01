@@ -5,6 +5,8 @@ import { login } from "../../actions/auth";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
+import Box from '@material-ui/core/Box';
+import MovieIcon from '@material-ui/icons/Movie';
 
 class LoginFacebook extends Component {
   state = {
@@ -36,17 +38,30 @@ class LoginFacebook extends Component {
           />
         ))
       : (facebookData = (
-          <Grid container>
-            <Grid item xs={12}>
+          <Box
+            justifyContent="center"
+						flexDirection="column"
+						alignItems="center"
+						display="flex"
+						textAlign="center"
+						spacing={3}
+						justify="center"
+          >
+							<MovieIcon/>
+							<h1 >Movies</h1>
+							
               <FacebookLoginBtn
                 appId="412227666450687"
                 autoLoad={false}
                 fields="name,picture"
                 onClick={this.componentClicked}
-                callback={this.responseFacebook}
+								callback={this.responseFacebook}
+								data-size="large"
+								data-layout="rounded"
+								className="fb-login-button"
+								data-button-type="login-with"
               />
-            </Grid>
-          </Grid>
+          </Box>
         ));
 
     return <>{facebookData}</>;

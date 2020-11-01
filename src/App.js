@@ -15,7 +15,7 @@ import PrivateRoute from "./components/Common/PrivateRoute";
 function App(props) {
   return (
     <Provider store={store}>
-      <Container maxWidth="xl" fixed="true">
+      <Container maxWidth="xl" fixed="true" style={{ backgroundColor: '#f5f5f5', height: '100vh' }}>
         <BrowserRouter>
           <Navbar />
           <Switch>
