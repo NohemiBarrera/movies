@@ -56,10 +56,6 @@ class LoginFacebook extends Component {
                 fields="name,picture"
                 onClick={this.componentClicked}
 								callback={this.responseFacebook}
-								data-size="large"
-								data-layout="rounded"
-								className="fb-login-button"
-								data-button-type="login-with"
               />
           </Box>
         ));

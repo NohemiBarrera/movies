@@ -11,6 +11,7 @@ class Profile extends Component {
   }
 
   onLogout() {
+    window.FB.logout();
     this.props.onLogout();
   }
 
