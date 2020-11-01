@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getNowPlayingMovies } from "../../actions/movies";
 
-const Movies = () => {
+const NowPlaying = () => {
   const dispatch = useDispatch();
   const now_playing_movies = useSelector(
     (state) => state.movies.now_playing_movies
@@ -24,4 +24,4 @@ const Movies = () => {
   );
 }
 
-export default Movies;
+export default NowPlaying;
