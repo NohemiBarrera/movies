@@ -4,7 +4,6 @@ import { Redirect } from "react-router";
 import { login } from "../../actions/auth";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import "../../App.css";
 
@@ -14,6 +13,7 @@ class LoginFacebook extends Component {
     name: "",
     picture: "",
   };
+  
   static propTypes = {
     isAuthenticated: PropTypes.bool,
   };

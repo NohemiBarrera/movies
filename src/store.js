@@ -5,7 +5,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { loadState, saveState } from "./toLocalStorage";
 
 const initialState = loadState();
-console.log(initialState);
 
 const middleware = [thunk];
 

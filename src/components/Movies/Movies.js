@@ -1,7 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -15,11 +15,6 @@ import Upcoming from "./Upcoming";
 const Movies = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
-
-  const now_playing = <NowPlaying />;
-  const popular = <Popular />;
-  const top_rated = <TopRated />;
-  const upcoming = <Upcoming />;
 
   const options = [
     "",

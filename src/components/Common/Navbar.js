@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = (props) => {
   const classes = useStyles();
-  console.log(props.isAuthenticated);
   const token = localStorage.getItem("token");
 
   return (

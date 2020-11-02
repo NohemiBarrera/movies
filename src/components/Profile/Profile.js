@@ -19,7 +19,7 @@ class Profile extends Component {
 
   render() {
     const name = this.props.name;
-    console.log(name)
+    
     return localStorage.getItem("token") ? (
       <div>
         <p>{name}</p>
