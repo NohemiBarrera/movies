@@ -5,6 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
   actions: {
     height: "2rem",
-    justifyContent: "end"
-  }
+    justifyContent: "end",
+  },
 }));
 
 const MovieCard = (props) => {
@@ -28,16 +29,17 @@ const MovieCard = (props) => {
   return (
     <Card className={classes.root}>
       <CardActions disableSpacing className={classes.actions}>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={props.onClick}>
           <FavoriteIcon />
         </IconButton>
       </CardActions>
-
-      <CardMedia
-        className={classes.media}
-        image={props.image}
-        title={props.title}
-      />
+      <Link to={`/movie/detail/${props.url}`}>
+        <CardMedia
+          className={classes.media}
+          image={props.image}
+          title={props.title}
+        />
+      </Link>
     </Card>
   );
 };

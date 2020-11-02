@@ -3,6 +3,7 @@ import {
   GET_POPULAR_MOVIES,
   GET_TOP_RATED_MOVIES,
   GET_UPCOMING_MOVIES,
+  GET_MOVIE_DETAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -11,7 +12,13 @@ const initialState = {
   top_rated_movies: [],
   upcoming_movies: [],
   videos: [],
-  favorite_movies: []
+  favorite_movies: [],
+  title: "",
+  release_date: "",
+  poster_path: "",
+  runtime: "",
+  overview: "",
+  vote_average: "",
 };
 
 export default function (state = initialState, action) {
@@ -27,15 +34,25 @@ export default function (state = initialState, action) {
         popular_movies: action.payload,
       };
     case GET_TOP_RATED_MOVIES:
-        return {
-            ...state,
-            top_rated_movies: action.payload,
-        };
+      return {
+        ...state,
+        top_rated_movies: action.payload,
+      };
     case GET_UPCOMING_MOVIES:
-        return {
-            ...state,
-            upcoming_movies: action.payload,
-        };
+      return {
+        ...state,
+        upcoming_movies: action.payload,
+      };
+    case GET_MOVIE_DETAIL:
+      return {
+        ...state,
+        title: action.payload.title,
+        release_date:action.payload.release_date,
+        poster_path: action.payload.poster_path,
+        runtime: action.payload.runtime,
+        overview: action.payload.overview,
+        vote_average: action.payload.vote_average,
+      };
     default:
       return state;
   }

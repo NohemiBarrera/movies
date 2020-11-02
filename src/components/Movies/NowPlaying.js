@@ -17,13 +17,18 @@ const NowPlaying = () => {
 
   const movies = now_playing_movies.map((item, idx) => {
     return (
-      <Grid xs={6} lg={3} key={idx}>
-        <MovieCard title={item.title} image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} />
+      <Grid xs={6} lg={3} key={idx} spacing={2}>
+        <MovieCard
+          title={item.title}
+          url={item.id}
+          image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+          onClick={() => console.log("now playing add")}
+        />
       </Grid>
     );
   });
 
-  return (movies);
+  return movies;
 };
 
 export default NowPlaying;
