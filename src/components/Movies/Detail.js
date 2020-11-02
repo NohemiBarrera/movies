@@ -1,27 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getMovieDetail } from "../../actions/movies";
+import { getMovieDetail, getMovieVideos } from "../../actions/movies";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
+import ReactPlayer from "react-player/youtube";
 
 const useStyles = makeStyles({
+  container: {
+    paddingTop: "2rem",
+  },
   root: {
     flexRoot: 1,
-  },
-  info: {
-    paddingLeft: "1rem",
   },
   media: {
     width: "50%",
   },
   mediaContainer: {
-      display: "flex",
-      justifyContent: "center"
+    display: "flex",
+    justifyContent: "center",
+  },
+  playerWrapper: {
+    position: "relative",
+    paddingTop: "56.25%" /* Player ratio: 100 / (1280 / 720) */,
+  },
+  reactPlayer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
+  noVideo: {
+    textAlign: "center"
   }
 });
 
@@ -42,10 +54,17 @@ const Detail = (props) => {
     dispatch(getMovieDetail(id));
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getMovieVideos(id));
+  }, [dispatch]);
+
+  const videos = useSelector((state) => state.movies.videos);
+  const videoKey = videos.length !== 0 ? videos[0].key : "";
+  console.log(videoKey);
+
   return (
     <div className={classes.root}>
-      <h2>Detalle</h2>
-      <Grid container>
+      <Grid container className={classes.container}>
         <Grid lg={6} xs={12} className={classes.mediaContainer}>
           <Card className={classes.media}>
             <CardMedia
@@ -58,7 +77,7 @@ const Detail = (props) => {
           </Card>
         </Grid>
         <Grid lg={6} xs={12}>
-          <h2 className={classes.info}>{title}</h2>
+          <h1>{title}</h1>
           <Grid container>
             <Grid xs={6}>
               <p>
@@ -67,14 +86,14 @@ const Detail = (props) => {
             </Grid>
             <Grid xs={6}>
               <p>
-                Duración <b>{runtime}</b>
+                Duración <b>{runtime} min</b>
               </p>
             </Grid>
           </Grid>
           <Grid container>
             <Grid xs={6}>
               <p>
-                Calificaión <b>{vote_average}</b>
+                Calificación <b>{vote_average}</b>
               </p>
             </Grid>
             <Grid xs={6}>
@@ -84,6 +103,23 @@ const Detail = (props) => {
           <h3>Resumen</h3>
           <p>{overview}</p>
         </Grid>
+        {videoKey !== "" ? (
+          <Grid lg={12} xs={12} className={classes.mediaContainer}>
+            <Box textAlign="center" width="100%">
+              <h2>Trailer</h2>
+              <div className={classes.playerWrapper}>
+                <ReactPlayer
+                  url={`https://www.youtube.com/watch?v=${videoKey}`}
+                  className={classes.reactPlayer}
+                  width="100%"
+                  height="100%"
+                />
+              </div>
+            </Box>
+          </Grid>
+        ) : (
+          <h2 className={classes.noVideo}>No hay videos disponibles</h2>
+        )}
       </Grid>
     </div>
   );

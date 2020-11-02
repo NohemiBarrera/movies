@@ -5,6 +5,7 @@ import {
   GET_TOP_RATED_MOVIES,
   GET_UPCOMING_MOVIES,
   GET_MOVIE_DETAIL,
+  GET_MOVIE_VIDEO,
 } from "./types";
 
 let APIKey = "2c2295ea8b7a115e319ed2ddd08aa9a3";
@@ -56,31 +57,46 @@ export const getTopRatedMovies = () => (dispatch) => {
 };
 
 export const getUpcomingMovies = () => (dispatch) => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${APIKey}&language=es-ES&page=1`,
-        { headers: config }
-      )
-      .then((res) => {
-        dispatch({
-          type: GET_UPCOMING_MOVIES,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+  axios
+    .get(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${APIKey}&language=es-ES&page=1`,
+      { headers: config }
+    )
+    .then((res) => {
+      dispatch({
+        type: GET_UPCOMING_MOVIES,
+        payload: res.data.results,
+      });
+    })
+    .catch((err) => console.log(err));
+};
 
 export const getMovieDetail = (id) => (dispatch) => {
-    axios
-        .get(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKey}&language=es-ES`,
-            { headers: config}
-        )
-        .then((res) => {
-            dispatch({
-                type: GET_MOVIE_DETAIL,
-                payload: res.data
-            });
-        })
-        .catch((err) => console.log(err));
+  axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKey}&language=es-ES&page=1`,
+      { headers: config }
+    )
+    .then((res) => {
+      dispatch({
+        type: GET_MOVIE_DETAIL,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getMovieVideos = (id) => (dispatch) => {
+  axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${APIKey}&language=es-ES&page=1`,
+      { headers: config }
+    )
+    .then((res) => {
+      dispatch({
+        type: GET_MOVIE_VIDEO,
+        payload: res.data.results,
+      });
+    })
+    .catch((err) => console.log(err));
 };

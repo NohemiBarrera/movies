@@ -4,6 +4,7 @@ import {
   GET_TOP_RATED_MOVIES,
   GET_UPCOMING_MOVIES,
   GET_MOVIE_DETAIL,
+  GET_MOVIE_VIDEO,
 } from "../actions/types";
 
 const initialState = {
@@ -53,6 +54,11 @@ export default function (state = initialState, action) {
         overview: action.payload.overview,
         vote_average: action.payload.vote_average,
       };
+    case GET_MOVIE_VIDEO:
+      return {
+        ...state,
+        videos: action.payload
+      }
     default:
       return state;
   }

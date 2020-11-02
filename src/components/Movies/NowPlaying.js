@@ -4,8 +4,26 @@ import { useEffect } from "react";
 import { getNowPlayingMovies } from "../../actions/movies";
 import MovieCard from "../Common/MovieCard";
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    flexRoot: 1,
+  },
+  info: {
+    paddingLeft: "1rem",
+  },
+  media: {
+    width: "50%",
+  },
+  mediaContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+});
 
 const NowPlaying = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const now_playing_movies = useSelector(
     (state) => state.movies.now_playing_movies
@@ -17,7 +35,13 @@ const NowPlaying = () => {
 
   const movies = now_playing_movies.map((item, idx) => {
     return (
-      <Grid xs={6} lg={3} key={idx} spacing={2}>
+      <Grid
+        xs={6}
+        lg={3}
+        key={idx}
+        spacing={2}
+        className={classes.mediaContainer}
+      >
         <MovieCard
           title={item.title}
           url={item.id}

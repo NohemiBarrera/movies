@@ -11,11 +11,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     marginBottom: "20px",
-  },
-  media: {
-    height: "auto",
-    paddingTop: "141.25%", // 16:9
-    backgroundSize: "contain",
+    width: "90%",
   },
   actions: {
     height: "2rem",
@@ -27,7 +23,7 @@ const MovieCard = (props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card  className={classes.root}>
       <CardActions disableSpacing className={classes.actions}>
         <IconButton aria-label="add to favorites" onClick={props.onClick}>
           <FavoriteIcon />
@@ -35,7 +31,8 @@ const MovieCard = (props) => {
       </CardActions>
       <Link to={`/movie/detail/${props.url}`}>
         <CardMedia
-          className={classes.media}
+          component="img"
+          alt={props.title}
           image={props.image}
           title={props.title}
         />
