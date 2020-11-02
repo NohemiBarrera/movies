@@ -13,6 +13,8 @@ class Profile extends Component {
   onLogout() {
     window.FB.logout();
     this.props.onLogout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("state");
   }
 
   render() {

@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getPopularMovies } from "../../actions/movies";
+import MovieCard from "../Common/MovieCard";
+import Grid from "@material-ui/core/Grid";
 
 const Popular = () => {
   const dispatch = useDispatch();
@@ -14,14 +16,13 @@ const Popular = () => {
   }, [dispatch]);
 
   const movies = popular_movies.map((item, idx) => {
-    return <p key={idx}>Título {item.title}</p>;
+    return (
+      <Grid xs={6} lg={3} key={idx}>
+        <MovieCard title={item.title} image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} />
+      </Grid>
+    )
   });
-  return (
-    <div>
-      <h1>Tendencia</h1>
-      {movies}
-    </div>
-  );
+  return (movies);
 }
 
 export default Popular;

@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: "#f5f5f5";
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {
@@ -26,6 +29,28 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.container-login{
+  height: 100vh;
+  color: #f5f5f5;
+}
+
+.moon-background {
+  background-image: url("./assets/moon.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.white-button {
+  color: #f5f5f5;
+}
+
+#fav.white-button:active{
+  color: red; 
+}
+.white-button:active{
+  color: #3f51b5;
 }
 
 @keyframes App-logo-spin {

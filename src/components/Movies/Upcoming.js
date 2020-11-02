@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUpcomingMovies } from "../../actions/movies";
+import MovieCard from "../Common/MovieCard";
+import Grid from "@material-ui/core/Grid";
 
 const Upcoming = () => {
   const dispatch = useDispatch();
@@ -14,14 +16,14 @@ const Upcoming = () => {
   }, [dispatch]);
 
   const movies = upcoming_movies.map((item, idx) => {
-    return <p key={idx}>Título {item.title}</p>;
+    return (
+      <Grid xs={6} lg={3} key={idx}>
+        <MovieCard title={item.title} image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} />
+      </Grid>
+    );
   });
-  return (
-    <div>
-      <h1>Proximas a estrenar</h1>
-      {movies}
-    </div>
-  );
+
+  return (movies);
 }
 
 export default Upcoming;

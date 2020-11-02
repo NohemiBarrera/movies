@@ -10,6 +10,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { ROOT_URL, FAVORITE_MOVIES, PROFILE } from "../../urls";
+import "../../App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,24 +33,24 @@ const Navbar = (props) => {
   return (
     token && (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" color="primary">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               Películas
             </Typography>
             <Link to={ROOT_URL}>
-              <IconButton color="inherit">
-                <HomeIcon />
+              <IconButton>
+                <HomeIcon className="white-button"/>
               </IconButton>
             </Link>
             <Link to={FAVORITE_MOVIES}>
-              <IconButton color="inherit">
-                <FavoriteIcon />
+              <IconButton>
+                <FavoriteIcon className="white-button" id="fav"/>
               </IconButton>
             </Link>
             <Link to={PROFILE}>
-              <IconButton color="inherit">
-                <PersonIcon />
+              <IconButton>
+                <PersonIcon className="white-button"/>
               </IconButton>
             </Link>
           </Toolbar>

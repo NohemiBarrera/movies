@@ -22,7 +22,6 @@ export default function (state = initialState, action) {
       };
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
-      localStorage.removeItem("token");
       return {
         ...state,
         isAuthenticated: false,
