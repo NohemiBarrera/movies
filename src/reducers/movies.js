@@ -5,6 +5,8 @@ import {
   GET_UPCOMING_MOVIES,
   GET_MOVIE_DETAIL,
   GET_MOVIE_VIDEO,
+  ADD_FAVORITE_MOVIE,
+  DELETE_FAVORITE_MOVIE,
 } from "../actions/types";
 
 const initialState = {
@@ -58,6 +60,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         videos: action.payload
+      }
+    case ADD_FAVORITE_MOVIE:
+      return {
+        ...state,
+        favorite_movies: action.favorite_movies
+      }
+    case DELETE_FAVORITE_MOVIE:
+      return {
+        ...state,
+        favorite_movies: action.favorite_movies
       }
     default:
       return state;

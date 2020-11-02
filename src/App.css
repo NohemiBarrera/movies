@@ -46,6 +46,14 @@
   color: #f5f5f5;
 }
 
+.red-button {
+  color: red;
+}
+
+.gray-button {
+  color: #707070;
+}
+
 #fav.white-button:active{
   color: red; 
 }

@@ -26,7 +26,7 @@ const MovieCard = (props) => {
     <Card  className={classes.root}>
       <CardActions disableSpacing className={classes.actions}>
         <IconButton aria-label="add to favorites" onClick={props.onClick}>
-          <FavoriteIcon />
+          <FavoriteIcon className={props.isFavorite ? "red-button" : "gray-button"}/>
         </IconButton>
       </CardActions>
       <Link to={`/movie/detail/${props.url}`}>

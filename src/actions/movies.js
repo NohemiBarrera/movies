@@ -6,6 +6,8 @@ import {
   GET_UPCOMING_MOVIES,
   GET_MOVIE_DETAIL,
   GET_MOVIE_VIDEO,
+  ADD_FAVORITE_MOVIE,
+  DELETE_FAVORITE_MOVIE,
 } from "./types";
 
 let APIKey = "2c2295ea8b7a115e319ed2ddd08aa9a3";
@@ -99,4 +101,25 @@ export const getMovieVideos = (id) => (dispatch) => {
       });
     })
     .catch((err) => console.log(err));
+};
+
+export const addFavoriteMovie = movie => (dispatch, getState) => {
+  const favorite_movies = getState().movies.favorite_movies;
+  const newFavorites = [...favorite_movies, movie];
+
+  dispatch({
+    type: ADD_FAVORITE_MOVIE,
+    favorite_movies: newFavorites
+  });
+};
+
+export const deleteFavoriteMovie = i => (dispatch, getState) => {
+  const favorite_movies = getState().movies.favorite_movies;
+  const newFavorites = [...favorite_movies];
+
+  newFavorites.splice(i, 1);
+  dispatch({
+    type: DELETE_FAVORITE_MOVIE,
+    favorite_movies: newFavorites
+  });
 };
