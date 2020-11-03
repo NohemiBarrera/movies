@@ -24,9 +24,10 @@ const useStyles = makeStyles({
 });
 
 const NowPlaying = () => {
+  let isFavorite;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [isFavorite, setIsFavorite] = useState(null);
+  //const [isFavorite, setIsFavorite] = useState(null);
   const favorite_movies = useSelector((state) => state.movies.favorite_movies);
   const now_playing_movies = useSelector(
     (state) => state.movies.now_playing_movies
@@ -36,12 +37,17 @@ const NowPlaying = () => {
     dispatch(getNowPlayingMovies());
   }, [dispatch]);
 
-  const handleClick = (id) => {
-    const isFavorite = favorite_movies.includes(id);
-    setIsFavorite(isFavorite);
+  const handleClick = (id, poster_path) => {
+    
+    if(favorite_movies.some(e => e.id === id)){
+      isFavorite = true
+    } else {
+      isFavorite = false
+    }
+    //setIsFavorite(isFavorite);
     isFavorite
       ? dispatch(deleteFavoriteMovie(id))
-      : dispatch(addFavoriteMovie(id));
+      : dispatch(addFavoriteMovie({id: id, poster_path: poster_path}));
   };
   
   const movies = now_playing_movies.map((item, idx) => {
@@ -57,8 +63,9 @@ const NowPlaying = () => {
           title={item.title}
           url={item.id}
           image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-          onClick={() => handleClick(item.id)}
-          iconClass={favorite_movies.includes(item.id) ? "red-button" : "gray-button"}
+          onClick={() => handleClick(item.id, item.poster_path)}
+          //iconClass={favorite_movies.includes(item.id) ? "red-button" : "gray-button"}
+          iconClass={favorite_movies.some(e => e.id === item.id) ? "red-button" : "gray-button"}
         />
       </Grid>
     );
