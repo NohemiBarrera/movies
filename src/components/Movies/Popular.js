@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getPopularMovies, addFavoriteMovie, deleteFavoriteMovie } from "../../actions/movies";
 import MovieCard from "../Common/MovieCard";
 import Grid from "@material-ui/core/Grid";
@@ -24,9 +24,9 @@ const useStyles = makeStyles({
 });
 
 const Popular = () => {
+  let isFavorite;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [isFavorite, setIsFavorite] = useState(null);
   const favorite_movies = useSelector((state) => state.movies.favorite_movies);
   const popular_movies = useSelector((state) => state.movies.popular_movies);
 
@@ -34,12 +34,15 @@ const Popular = () => {
     dispatch(getPopularMovies());
   }, [dispatch]);
 
-  const handleClick = (id, i) => {
-    const isFavorite = favorite_movies.includes(id);
-    setIsFavorite(isFavorite);
+  const handleClick = (id, poster_path) => {
+    if(favorite_movies.some(e => e.id === id)){
+      isFavorite = true
+    } else {
+      isFavorite = false
+    }
     isFavorite
       ? dispatch(deleteFavoriteMovie(id))
-      : dispatch(addFavoriteMovie(id));
+      : dispatch(addFavoriteMovie({id: id, poster_path: poster_path}));
   };
 
   const movies = popular_movies.map((item, idx) => {
@@ -55,8 +58,8 @@ const Popular = () => {
           title={item.title}
           url={item.id}
           image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-          onClick={() => handleClick(item.id)}
-          iconClass={favorite_movies.includes(item.id) ? "red-button" : "gray-button"}
+          onClick={() => handleClick(item.id, item.poster_path)}
+          iconClass={favorite_movies.some(e => e.id === item.id) ? "red-button" : "gray-button"}
         />
       </Grid>
     );

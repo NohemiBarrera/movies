@@ -23,11 +23,10 @@ const MovieCard = (props) => {
   const classes = useStyles();
 
   return (
-    <Card  className={classes.root}>
+    <Card className={classes.root}>
       <CardActions disableSpacing className={classes.actions}>
-        
         <IconButton aria-label="add to favorites" onClick={props.onClick}>
-          <FavoriteIcon className={props.iconClass}/>
+          <FavoriteIcon className={props.iconClass} />
         </IconButton>
       </CardActions>
       <Link to={`/movie/detail/${props.url}`}>

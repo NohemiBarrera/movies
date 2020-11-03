@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { addFavoriteMovie, deleteFavoriteMovie } from "../../actions/movies";
 import MovieCard from "../Common/MovieCard";
 import Grid from "@material-ui/core/Grid";
@@ -24,19 +23,17 @@ const useStyles = makeStyles({
 });
 
 const Favorites = () => {
+  let isFavorite;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [isFavorite, setIsFavorite] = useState(null);
   const favorite_movies = useSelector((state) => state.movies.favorite_movies);
 
   const handleClick = (id, poster_path) => {
-    let isFavorite;
     if (favorite_movies.some((e) => e.id === id)) {
       isFavorite = true;
     } else {
       isFavorite = false;
     }
-    setIsFavorite(isFavorite);
     isFavorite
       ? dispatch(deleteFavoriteMovie(id))
       : dispatch(addFavoriteMovie({ id: id, poster_path: poster_path }));
@@ -48,14 +45,14 @@ const Favorites = () => {
       {favorite_movies.length === 0 ? (
         <h3>Aún no has agregado ninguna película a tus favoritas</h3>
       ) : (
-        <Grid container>
+        <Grid container spacing={2}>
           {favorite_movies.map((item, idx) => {
             return (
               <Grid
+                item
                 xs={6}
                 lg={3}
                 key={idx}
-                spacing={2}
                 className={classes.mediaContainer}
               >
                 <MovieCard

@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
 import List from "@material-ui/core/List";
@@ -36,8 +35,6 @@ const Movies = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const auth = useSelector((state) => state.auth.name);
 
   return (
     <>
@@ -77,7 +74,7 @@ const Movies = () => {
 
       <ListItemText primary={`Mostrando Películas ${options[selectedIndex]}`} />
 
-      <Grid container>
+      <Grid container spacing={2}>
         {selectedIndex === 1 ? (
           <NowPlaying />
         ) : selectedIndex === 2 ? (

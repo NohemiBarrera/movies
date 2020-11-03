@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNowPlayingMovies, addFavoriteMovie, deleteFavoriteMovie } from "../../actions/movies";
 import MovieCard from "../Common/MovieCard";
@@ -27,7 +27,6 @@ const NowPlaying = () => {
   let isFavorite;
   const classes = useStyles();
   const dispatch = useDispatch();
-  //const [isFavorite, setIsFavorite] = useState(null);
   const favorite_movies = useSelector((state) => state.movies.favorite_movies);
   const now_playing_movies = useSelector(
     (state) => state.movies.now_playing_movies
@@ -38,13 +37,11 @@ const NowPlaying = () => {
   }, [dispatch]);
 
   const handleClick = (id, poster_path) => {
-    
     if(favorite_movies.some(e => e.id === id)){
       isFavorite = true
     } else {
       isFavorite = false
     }
-    //setIsFavorite(isFavorite);
     isFavorite
       ? dispatch(deleteFavoriteMovie(id))
       : dispatch(addFavoriteMovie({id: id, poster_path: poster_path}));
@@ -53,10 +50,10 @@ const NowPlaying = () => {
   const movies = now_playing_movies.map((item, idx) => {
     return (
       <Grid
+        item
         xs={6}
         lg={3}
         key={idx}
-        spacing={2}
         className={classes.mediaContainer}
       >
         <MovieCard
@@ -64,7 +61,6 @@ const NowPlaying = () => {
           url={item.id}
           image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
           onClick={() => handleClick(item.id, item.poster_path)}
-          //iconClass={favorite_movies.includes(item.id) ? "red-button" : "gray-button"}
           iconClass={favorite_movies.some(e => e.id === item.id) ? "red-button" : "gray-button"}
         />
       </Grid>
