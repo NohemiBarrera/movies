@@ -51,7 +51,8 @@ const NowPlaying = () => {
     return (
       <Grid
         item
-        xs={6}
+        xs={12}
+        md={3}
         lg={3}
         key={idx}
         className={classes.mediaContainer}

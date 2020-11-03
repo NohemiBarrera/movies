@@ -1,7 +1,5 @@
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "./types";
 
-//const origin = window.location.origin;
-
 export const login = (res) => {
   return {
     type: LOGIN_SUCCESS,

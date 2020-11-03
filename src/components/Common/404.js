@@ -2,7 +2,7 @@ import React from "react";
 import cat from "../../assets/404.png";
 import Box from "@material-ui/core/Box";
 
-export default function Error404() {
+const Error404 = () => {
   return (
     <>
       <Box textAlign="center">
@@ -17,3 +17,5 @@ export default function Error404() {
     </>
   );
 }
+
+export default Error404;
