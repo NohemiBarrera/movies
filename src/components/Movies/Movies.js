@@ -39,8 +39,6 @@ const Movies = () => {
 
   const auth = useSelector((state) => state.auth.name);
 
-  console.log(auth);
-
   return (
     <>
       <List component="nav" aria-label="Device settings">

@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Detail = (props) => {
+const Detail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const favorite_movies = useSelector((state) => state.movies.favorite_movies);
@@ -56,15 +56,10 @@ const Detail = (props) => {
   const runtime = useSelector((state) => state.movies.runtime);
   const poster_path = useSelector((state) => state.movies.poster_path);
 
-  console.log(favorite_movies);
-
   const { id } = useParams();
   const movieID = Number.parseInt(id, 10)
-  
-  console.log(typeof(movieID));
  
   const isFavorite = favorite_movies.includes(movieID);
-  console.log(isFavorite);
 
   useEffect(() => {
     dispatch(getMovieDetail(id));
@@ -76,9 +71,8 @@ const Detail = (props) => {
 
   const handleClick = (e, i) => {
     e.preventDefault();
-    //const miau = Number.parseInt(id, 10)
     isFavorite
-      ? dispatch(deleteFavoriteMovie(i))
+      ? dispatch(deleteFavoriteMovie(movieID))
       : dispatch(addFavoriteMovie(movieID));
   };
 

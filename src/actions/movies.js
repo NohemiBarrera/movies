@@ -113,11 +113,11 @@ export const addFavoriteMovie = movie => (dispatch, getState) => {
   })
 };
 
-export const deleteFavoriteMovie = i => (dispatch, getState) => {
-  const favorite_movies = getState().movies.favorite_movies;
-  const newFavorites = [...favorite_movies];
+export const deleteFavoriteMovie = (id) => (dispatch, getState) => {
 
-  newFavorites.splice(i, 1);
+  const favorite_movies = getState().movies.favorite_movies;
+  const newFavorites = favorite_movies.filter(item => item !== id)
+ 
   dispatch({
     type: DELETE_FAVORITE_MOVIE,
     favorite_movies: newFavorites

@@ -36,11 +36,11 @@ const NowPlaying = () => {
     dispatch(getNowPlayingMovies());
   }, [dispatch]);
 
-  const handleClick = (id, i) => {
+  const handleClick = (id) => {
     const isFavorite = favorite_movies.includes(id);
     setIsFavorite(isFavorite);
     isFavorite
-      ? dispatch(deleteFavoriteMovie(i))
+      ? dispatch(deleteFavoriteMovie(id))
       : dispatch(addFavoriteMovie(id));
   };
   
