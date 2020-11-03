@@ -110,7 +110,7 @@ export const addFavoriteMovie = movie => (dispatch, getState) => {
   dispatch({
     type: ADD_FAVORITE_MOVIE,
     favorite_movies: newFavorites
-  });
+  })
 };
 
 export const deleteFavoriteMovie = i => (dispatch, getState) => {

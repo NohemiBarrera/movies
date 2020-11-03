@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getMovieDetail, getMovieVideos, addFavoriteMovie, deleteFavoriteMovie } from "../../actions/movies";
+import {
+  getMovieDetail,
+  getMovieVideos,
+  addFavoriteMovie,
+  deleteFavoriteMovie,
+} from "../../actions/movies";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -51,13 +56,14 @@ const Detail = (props) => {
   const runtime = useSelector((state) => state.movies.runtime);
   const poster_path = useSelector((state) => state.movies.poster_path);
 
-  
-  
   console.log(favorite_movies);
 
   const { id } = useParams();
-  console.log("Esta es la película a agregar:" + id);
-  const isFavorite = favorite_movies.includes(id);
+  const movieID = Number.parseInt(id, 10)
+  
+  console.log(typeof(movieID));
+ 
+  const isFavorite = favorite_movies.includes(movieID);
   console.log(isFavorite);
 
   useEffect(() => {
@@ -70,9 +76,10 @@ const Detail = (props) => {
 
   const handleClick = (e, i) => {
     e.preventDefault();
-    isFavorite ? (
-      dispatch(deleteFavoriteMovie(i))
-    ) : dispatch(addFavoriteMovie(id))
+    //const miau = Number.parseInt(id, 10)
+    isFavorite
+      ? dispatch(deleteFavoriteMovie(i))
+      : dispatch(addFavoriteMovie(movieID));
   };
 
   const videos = useSelector((state) => state.movies.videos);
@@ -114,7 +121,9 @@ const Detail = (props) => {
             </Grid>
             <Grid xs={6}>
               <IconButton aria-label="add to favorites" onClick={handleClick}>
-                <FavoriteIcon className={isFavorite ? "red-button" : "gray-button"}/>
+                <FavoriteIcon
+                  className={isFavorite ? "red-button" : "gray-button"}
+                />
               </IconButton>
             </Grid>
           </Grid>
