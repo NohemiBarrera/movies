@@ -8,7 +8,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonIcon from "@material-ui/icons/Person";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { ROOT_URL, FAVORITE_MOVIES, PROFILE } from "../../urls";
 import "../../App.css";
 
@@ -23,9 +23,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     textAlign: "start",
   },
+  button: {
+    "&.active": {
+      background: "darkblue",
+    },
+  },
 }));
 
-const Navbar = (props) => {
+const Navbar = () => {
   const classes = useStyles();
   const token = localStorage.getItem("token");
 
@@ -37,21 +42,21 @@ const Navbar = (props) => {
             <Typography variant="h6" className={classes.title}>
               Películas
             </Typography>
-            <Link to={ROOT_URL}>
+            <NavLink to={ROOT_URL}>
               <IconButton>
-                <HomeIcon className="white-button"/>
+                <HomeIcon className="white-button" />
               </IconButton>
-            </Link>
-            <Link to={FAVORITE_MOVIES}>
+            </NavLink>
+            <NavLink to={FAVORITE_MOVIES} className={classes.button}>
               <IconButton>
-                <FavoriteIcon className="white-button" id="fav"/>
+                <FavoriteIcon className="white-button" id="fav" />
               </IconButton>
-            </Link>
-            <Link to={PROFILE}>
+            </NavLink>
+            <NavLink to={PROFILE} className={classes.button}>
               <IconButton>
-                <PersonIcon className="white-button"/>
+                <PersonIcon className="white-button" />
               </IconButton>
-            </Link>
+            </NavLink>
           </Toolbar>
         </AppBar>
       </div>

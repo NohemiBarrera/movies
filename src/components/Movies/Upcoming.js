@@ -48,7 +48,8 @@ const Upcoming = () => {
   const movies = upcoming_movies.map((item, idx) => {
     return (
       <Grid
-        xs={6}
+        xs={12}
+        md={3}
         lg={3}
         key={idx}
         spacing={2}
