@@ -9,7 +9,7 @@ In order to access the application it is necessary to hace a facebook account. I
 
 In the project directory, you can run:
 
-### `yarn add`
+### `yarn install`
 
 Install all the dependencies of the project.
 
